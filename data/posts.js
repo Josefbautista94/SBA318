@@ -23,6 +23,14 @@ const posts = [
             category: "Anime",
             userId: 2,
             date: "2025-04-10"
+          },
+          {
+            id: 3,
+            title: "Top 5 Indie Games of 2025",
+            content: "Exploring the most innovative indie games released this year...",
+            category: "video-games",
+            userId: 2,
+            date: "2025-04-11"
           }
         ];
 
