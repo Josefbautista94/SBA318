@@ -12,7 +12,7 @@ const posts = [
         id:1,
         title: "Why I Still use React",
         content: "Even Though everyone says its old 🥺",
-        category : "Tech",
+        category : "tech",
         userId : 1,
         date : "2023-04-11"
     },
@@ -20,7 +20,7 @@ const posts = [
             id: 2,
             title: "Naruto Fumbled the Bag",
             content: "Let's talk about Boruto for a second.",
-            category: "Anime",
+            category: "anime",
             userId: 2,
             date: "2025-04-10"
           },
