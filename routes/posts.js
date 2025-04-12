@@ -33,4 +33,26 @@ router.get('/', (req, res) => {
     res.json(enhancedPosts);
 });
 
+// GET a single post by ID
+router.get('/:id', (req, res) => {
+    const postId = parseInt(req.params.id)// Converts the 'id' parameter from a string to an integer
+    const post = posts.find(p => p.id === postId); // Searches the posts array for a post with an id matching postId
+
+    if (!post) { // if no post we respond with a 404 with a message
+        return res.status(404).json({ message: "Post Not Found!" })
+    }
+
+    const author = users.find(user => user.id === post.userId) // using the find() method to attempt to find the author
+    const enhancedPost = {
+        ...post, // Spread the original post's properties into a new object
+        authorName: author ? author.name : "Unknown",  // Add author name or fallback
+        authorAvatar: author ? author.avatar : "❓" // Add author avatar or fallback emoji
+    }
+
+    res.json(enhancedPost)
+});
+
+// Additional routes for creating, updating, and deleting posts will be added here!
+
+
 module.exports = router; // Export the router for use in app.js or server.js
