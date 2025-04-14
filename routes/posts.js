@@ -52,6 +52,17 @@ router.get('/:id', (req, res) => {
     res.json(enhancedPost)
 });
 
+
+router.post("/", (req, res)=> {
+
+    const { title, content, category, userId} = req.body;
+
+
+
+
+
+})
+
 // Additional routes for creating, updating, and deleting posts will be added here!
 
 
