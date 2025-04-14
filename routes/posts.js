@@ -5,6 +5,9 @@ const users = require("../data/users"); // Importing mock user data
 
 // GET all posts (optionally filtered by category)
 router.get('/', (req, res) => {
+
+    console.log("Request received at:", req.requestTime);
+
     // Object destructuring to extract 'category' from query parameters
     // Example: /posts?category=tech → req.query = { category: 'tech' }
     const { category } = req.query;
