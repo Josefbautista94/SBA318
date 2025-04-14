@@ -79,6 +79,7 @@ router.post("/", (req, res) => { // Used to create new resources—in this case,
     res.status(201).json(newPost); // This confirms successful creation to the user.​
 });
 
+// PATCH /posts/:id - Update an existing post
 router.patch("/:id", (req, res) => { // Sets up a dynamic route that listens to /posts/:id
 
     const postId = parseInt(req.params.id); // Converts the route id param from a string to a number
@@ -90,16 +91,33 @@ router.patch("/:id", (req, res) => { // Sets up a dynamic route that listens to 
         return res.status(404).json({ message: "Post not found!" })
     }
 
-    const {title, content, category} = req.body; // Uses destructuring to pull out just what you might want to update
+    const { title, content, category } = req.body; // Uses destructuring to pull out just what you might want to update
 
     // only updating fields that were sent in
     if (title !== undefined) post.title = title;
     if (content !== undefined) post.content = content;
-    if(category !== undefined) post.category = category;
+    if (category !== undefined) post.category = category;
 
     res.json(post); // Sends back the updated post 
 
 })
+
+// DELETE /posts/:id - Delete a specific post by ID
+router.delete("/:id", (req, res) => { // sets up a route to handle DELETE requests at /posts/:id
+
+    const postId = parseInt(req.params.id); // retrieves the id parameter from the URL and converts it to an integer
+    const index = posts.findIndex(p => p.id === postId); // searches for the index of the post with the matching ID in the posts array
+
+    if (index === -1) { // If findIndex returns -1, it means the post wasn't found, the server responds with a 404 status
+        return res.status(404).json({ message: "Post not found!" });
+    }
+
+    posts.splice(index, 1);   //  removes the post from the posts array at the found index
+
+    res.json({ message: "The post was deleted successfully!" }) // sends a JSON response confirming the deletion
+
+})
+
 // Additional routes for creating, updating, and deleting posts will be added here!
 
 
