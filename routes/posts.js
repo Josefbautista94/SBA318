@@ -4,7 +4,7 @@ const posts = require("../data/posts"); // Importing mock post data
 const users = require("../data/users"); // Importing mock user data
 
 // GET all posts (optionally filtered by category)
-router.get('/', (req, res) => {
+router.get("/view", (req, res) => {
 
     console.log("Request received at:", req.requestTime);
 
@@ -32,8 +32,8 @@ router.get('/', (req, res) => {
         };
     });
 
-    // Send the enhanced posts back as JSON
-    res.json(enhancedPosts);
+    res.render("posts", { posts: enhancedPosts });
+
 });
 
 // GET a single post by ID
