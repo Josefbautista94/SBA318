@@ -52,16 +52,32 @@ router.get('/:id', (req, res) => {
     res.json(enhancedPost)
 });
 
-
+// POST creating a new blog post
 router.post("/", (req, res)=> {
 
     const { title, content, category, userId} = req.body;
 
+// Basic validation   
+if(!title || !content || !userId){
+    return res.status(400).json({message: "Title, Content, and UserId are required!"})
+}
 
+// Generating a new unique Id
+const newId = posts.length > 0 ? Math.max(...posts.map(post => post.id)) + 1 : 1;
 
+const newPost = {
+  id: newId,
+  title,
+  content,
+  category: category || "general", // Default category if not provided
+  userId,
+  createdAt: new Date().toISOString()
+};
 
+posts.push(newPost);
 
-})
+res.status(201).json(newPost);
+});
 
 // Additional routes for creating, updating, and deleting posts will be added here!
 
