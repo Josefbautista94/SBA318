@@ -53,32 +53,53 @@ router.get('/:id', (req, res) => {
 });
 
 // POST creating a new blog post
-router.post("/", (req, res)=> {
+router.post("/", (req, res) => { // Used to create new resources—in this case, a new blog post.
 
-    const { title, content, category, userId} = req.body;
+    const { title, content, category, userId } = req.body; // Using object destructuring to extract title, content, category and userID from the request body
 
-// Basic validation   
-if(!title || !content || !userId){
-    return res.status(400).json({message: "Title, Content, and UserId are required!"})
-}
+    // Basic validation   
+    if (!title || !content || !userId) { // If any of these are missing it responds with a 400 bas request
+        return res.status(400).json({ message: "Title, Content, and UserId are required!" })
+    }
 
-// Generating a new unique Id
-const newId = posts.length > 0 ? Math.max(...posts.map(post => post.id)) + 1 : 1;
+    // Generating a new unique Id
+    const newId = posts.length > 0 ? Math.max(...posts.map(post => post.id)) + 1 : 1; //Generates a unique ID for the new post. If the posts array has existing entries, it finds the maximum current ID and adds 1. If the array is empty, it starts with ID 1.
 
-const newPost = {
-  id: newId,
-  title,
-  content,
-  category: category || "general", // Default category if not provided
-  userId,
-  createdAt: new Date().toISOString()
-};
+    const newPost = { // Creating a new post object
+        id: newId,
+        title,
+        content,
+        category: category || "general", // Default category if not provided
+        userId,
+        createdAt: new Date().toISOString()
+    };
 
-posts.push(newPost);
+    posts.push(newPost); // adding new post to post array
 
-res.status(201).json(newPost);
+    res.status(201).json(newPost); // This confirms successful creation to the user.​
 });
 
+router.patch("/:id", (req, res) => { // Sets up a dynamic route that listens to /posts/:id
+
+    const postId = parseInt(req.params.id); // Converts the route id param from a string to a number
+    const post = posts.find(p => p.id === postId); // Looks up the post by id. Good use of find()
+
+
+
+    if (!post) { // error handling if no post is found.
+        return res.status(404).json({ message: "Post not found!" })
+    }
+
+    const {title, content, category} = req.body; // Uses destructuring to pull out just what you might want to update
+
+    // only updating fields that were sent in
+    if (title !== undefined) post.title = title;
+    if (content !== undefined) post.content = content;
+    if(category !== undefined) post.category = category;
+
+    res.json(post); // Sends back the updated post 
+
+})
 // Additional routes for creating, updating, and deleting posts will be added here!
 
 
