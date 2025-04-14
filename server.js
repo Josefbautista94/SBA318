@@ -1,22 +1,24 @@
-const express = require("express"); // Importing the Express module, essential for building web applications and APIs in Node.js
-const app = express(); // creating an instance of the Express application
-const postsRoutes = require('./routes/posts') // Importing the routes defined in the posts.js
+const express = require("express"); // Importing the Express module
+const app = express(); // Creating an instance of the Express app
+const postsRoutes = require('./routes/posts'); // Importing post routes
 const logger = require("./middleware/loggerMiddleware");
 const requestTime = require("./middleware/requestTimeMiddleware");
+const errorHandler = require('./middleware/errorHandler');
 
+// 🔧 Custom middleware
 app.use(logger);
 app.use(requestTime);
-app.use(express.static("public"));
-app.use(express.json()); // Middleware to parse JSON
-app.use('/posts', postsRoutes) // mounts the postRoutes middleware at the post path
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ message: "Something broke!" });
-});
+app.use(express.static("public")); // Serve static files (e.g., CSS)
+app.use(express.json()); // Middleware to parse incoming JSON
+
+// 📦 Mounted routes
+app.use('/posts', postsRoutes);
+
+// ❌ Fallback error handler (MUST come after routes!!)
+app.use(errorHandler);
 
 // Start the server
 const PORT = 3000;
-
 app.listen(PORT, () => {
-    console.log(`Server is running on port: ${PORT}!`)
-})
+    console.log(`Server is running on port: ${PORT}!`);
+});
