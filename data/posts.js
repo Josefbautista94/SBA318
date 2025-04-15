@@ -14,15 +14,15 @@ const posts = [
         content: "Even Though everyone says its old 🥺",
         category : "tech",
         userId : 1,
-        date : "2023-04-11"
-    },
+        createdAt: "2023-04-11"
+      },
         {
             id: 2,
             title: "Naruto Fumbled the Bag",
             content: "Let's talk about Boruto for a second.",
             category: "anime",
             userId: 2,
-            date: "2025-04-10"
+            createdAt: "2025-04-10"
           },
           {
             id: 3,
@@ -30,7 +30,7 @@ const posts = [
             content: "Exploring the most innovative indie games released this year...",
             category: "video-games",
             userId: 2,
-            date: "2025-04-11"
+            createdAt: "2025-04-11"
           }
         ];
 
