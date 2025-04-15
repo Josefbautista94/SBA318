@@ -3,6 +3,11 @@ const router = express.Router(); // Creates a new router object, allowing us to 
 const posts = require("../data/posts"); // Importing mock post data
 const users = require("../data/users"); // Importing mock user data
 
+// GET /posts/new - Show form to create a new post
+router.get("/new", (req, res) => {
+    res.render("newPost");
+  });
+
 // GET all posts (optionally filtered by category)
 router.get("/view", (req, res) => {
 

@@ -11,10 +11,13 @@ app.use(logger);
 app.use(requestTime);
 app.use(express.static("public")); // Serve static files (e.g., CSS)
 app.use(express.json()); // Middleware to parse incoming JSON
+app.use(express.urlencoded({ extended: true })); //This line tells Express to automatically parse form submissions, Required if you want to handle HTML form submissions (POST forms) 
+
+
+
 
 // 📦 Mounted routes
 app.use('/posts', postsRoutes);
-
 app.get("/", (req, res) => {
     res.render("index"); // this will render views/index.ejs
   });
