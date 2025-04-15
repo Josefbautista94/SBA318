@@ -88,4 +88,4 @@ Real database integration (MongoDB or PostgreSQL)
 
 🙌 Author
 Jose Bautista
-Crafted with grit, caffeine, surges and lofi
+Crafted with grit, caffeine and lofi
