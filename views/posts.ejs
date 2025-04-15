@@ -2,30 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>All Posts</title>
-    <link rel="stylesheet" href="/styles.css" />
+  <meta charset="UTF-8" />
+  <title>All Posts</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 
 <body>
-    <h1>📝 Blog Posts</h1>
+  <%- include("partials/navbar") %>
 
-    <ul>
-        <% posts.forEach(post=> { %>
-            <li>
-                <h2>
-                    <%= post.title %>
-                </h2>
-                <p>
-                    <%= post.content %>
-                </p>
-                <small>Category: <%= post.category %></small><br />
-                <small>Author: <%= post.authorName %>
-                        <%= post.authorAvatar %></small><br />
-                <small>Posted on: <%= new Date(post.createdAt).toLocaleString() %></small>
-            </li>
-            <% }) %>
-    </ul>
+  <h1>📝 Blog Posts</h1>
+
+  <ul>
+    <% posts.forEach(post => { %>
+      <li>
+        <h2><%= post.title %></h2>
+        <p><%= post.content %></p>
+        <small>Category: <%= post.category %></small><br />
+        <small>Author: <%= post.authorName %> <%= post.authorAvatar %></small><br />
+        <small>Posted on: <%= new Date(post.createdAt).toLocaleString() %></small>
+
+        <hr />
+
+        <!-- 📝 Comment Form -->
+        <form action="/comments" method="POST">
+          <input type="hidden" name="postId" value="<%= post.id %>" />
+
+          <label for="text">Leave a comment:</label><br />
+          <textarea name="text" required></textarea><br />
+
+          <label for="userId">Your User ID:</label><br />
+          <input type="number" name="userId" required /><br />
+
+          <button type="submit">Post Comment</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
 </body>
 
 </html>

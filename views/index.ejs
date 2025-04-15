@@ -1,11 +1,18 @@
 <!-- views/index.ejs -->
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Home</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="/styles.css" />
+
 </head>
+
 <body>
-  <h1>Welcome to the Blog API</h1>
-  <a href="/posts/view">View Posts</a>
+    <%- include("partials/navbar") %>
+
+        <h1>Welcome to the Blog API</h1>
+        <a href="/posts/view">View Posts</a>
 </body>
+
 </html>
