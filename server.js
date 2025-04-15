@@ -2,6 +2,7 @@ const express = require("express"); // Importing the Express module
 const app = express(); // Creating an instance of the Express app
 app.set("view engine", "ejs");
 const postsRoutes = require('./routes/posts'); // Importing post routes
+const commentsRoutes = require('./routes/comments');
 const logger = require("./middleware/loggerMiddleware");
 const requestTime = require("./middleware/requestTimeMiddleware");
 const errorHandler = require('./middleware/errorHandler');
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true })); //This line tells Express to au
 
 // 📦 Mounted routes
 app.use('/posts', postsRoutes);
+app.use("/comments", commentsRoutes);
 app.get("/", (req, res) => {
     res.render("index"); // this will render views/index.ejs
   });
